@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .title {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #34495e;
+            margin-bottom: 3rem;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .feature-button {
+            background: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            min-width: 250px;
+        }
+
+        .feature-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-button.chatbot {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+            color: white;
+        }
+
+        .feature-button.emotion {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff0000 100%);
+            color: white;
+        }
+
+        .icon {
+            font-size: 2.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+            .button-container {
+                flex-direction: column;
+            }
+            .feature-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Mental Health Assistant</h1>
+        <p class="subtitle">Choose a feature to get started</p>
+        
+        <div class="button-container">
+            <a href="/chatbot" class="feature-button chatbot">
+                <span class="icon">💬</span>
+                <span>Chat with AI Assistant</span>
+            </a>
+            
+            <a href="/emotion" class="feature-button emotion">
+                <span class="icon">😊</span>
+                <span>Emotion Detection</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html> 
