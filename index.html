@@ -4,274 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZENBOT</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #f5f7fa;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .chat-container {
-            height: 400px;
-            overflow-y: auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-        }
-
-        .message {
-            max-width: 70%;
-            margin: 10px 0;
-            padding: 12px 16px;
-            border-radius: 15px;
-            position: relative;
-            animation: messageSlide 0.3s ease-out;
-        }
-
-        .user-message {
-            background-color: #6b73ff;
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 5px;
-        }
-
-        .bot-message {
-            background-color: white;
-            color: #333;
-            margin-right: auto;
-            border-bottom-left-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .input-container {
-            display: flex;
-            padding: 20px;
-            background-color: white;
-            border-top: 1px solid #eee;
-        }
-
-        #userInput {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #eee;
-            border-radius: 25px;
-            outline: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        #userInput:focus {
-            border-color: #6b73ff;
-            box-shadow: 0 0 0 3px rgba(107, 115, 255, 0.1);
-        }
-
-        .send-button {
-            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            padding: 12px 25px;
-            margin-left: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .send-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(107, 115, 255, 0.3);
-        }
-
-        .typing-indicator {
-            display: none;
-            margin: 10px 0;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 15px;
-            width: fit-content;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .typing-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #6b73ff;
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typingAnimation 1.4s infinite ease-in-out;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes messageSlide {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes typingAnimation {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-8px); }
-        }
-
-        /* Custom scrollbar */
-        .chat-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .chat-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        .chat-container::-webkit-scrollbar-thumb {
-            background: #6b73ff;
-            border-radius: 3px;
-        }
-
-        .chat-container::-webkit-scrollbar-thumb:hover {
-            background: #000dff;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="st.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>RAG Chatbot</h1>
-        </div>
-        
-        <div class="chat-container" id="chatContainer">
-            <div class="message bot-message">
-                Hello! I'm your RAG-powered chatbot. How can I help you today?
+        <header class="animate__animated animate__fadeInDown ">
+            <div class="logo" style="margin-left: 0px;">
+                <i class="fas fa-brain"></i>
+                <h1>ZENBOT</h1>
             </div>
-        </div>
-        
-        <div class="typing-indicator" id="typingIndicator">
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-            <span class="typing-dot"></span>
-        </div>
-        
-        <div class="input-container">
-            <input type="text" 
-                   id="userInput" 
-                   placeholder="Type your message here..."
-                   autocomplete="off">
-            <button class="send-button" onclick="sendMessage()">Send</button>
+            
+            <nav>
+                <ul>
+                   
+                    <button class="btn-secondary " onclick="window.location.href='index.html'">Home</button>
+                 
+                    <button class="btn-secondary " onclick="window.location.href='Go.html'">Start Menu</button>
+                    
+                    <!-- <button class="btn-secondary " onclick="window.location.href='page.html'">Gose ON Page</button> -->
+                    <button class="btn-secondary " onclick="window.location.href='logo.html'">Login</button>
+
+                    <!-- <li><a href="page.html"></a>page</li> -->
+                </ul>
+            </nav>
+         <a  <button href="page.html" class="btn-connect ">Connect Google Fit</button> ></a>
+        </header>
+
+        <main>
+            <section class="hero animate__animated animate__fadeIn">
+                <div class="hero-text">
+                    <h2>Your AI Mental Health Companion</h2>
+                    <p>Track your moods, discover coping strategies, and connect with counselors - all in one place.</p>
+                    <div class="cta-buttons">
+                      <a <button   href="GO.html" class="btn-primary" id="startChat" style="text-decoration: none;">Start Chatting</button>></a>  
+                        <button class="btn-secondary">How It Works</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="im.jpg" style="border-radius: 10%; background: transparent;"  alt="AI Companion Illustration">
+                </div>
+            </section>
+
+            <section class="chat-container hidden animate__animated animate__fadeInUp" id="chatContainer">
+                <div class="chat-header">
+                    <h3>MindEase Companion</h3>
+                    <div class="mood-indicator">
+                        <span id="currentMood">Analyzing mood...</span>
+                        <div class="mood-icon" id="moodIcon">
+                            <i class="far fa-smile"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message animate__animated animate__fadeInLeft">
+                        <div class="avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="content">
+                            <p>Hi there! I'm your MindEase companion. How are you feeling today?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Type how you're feeling...">
+                    <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+                    <div class="quick-responses">
+                        <button class="quick-response" data-message="I'm feeling great today!">😊 Great</button>
+                        <button class="quick-response" data-message="I'm feeling okay.">😐 Okay</button>
+                        <button class="quick-response" data-message="I'm not doing well.">😔 Not Well</button>
+                    </div>
+                </div>
+            </section>
+
+            
+    <div class="wave-container" style="width: 100%;">
+        <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          <path d="M0,50 C300,150 900,-50 1200,50 L1200,200 L0,200 Z"></path>
+        </svg>
+        <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          <path d="M0,60 C400,120 800,0 1200,60 L1200,200 L0,200 Z"></path>
+        </svg>
+        <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          <path d="M0,70 C350,140 850,20 1200,70 L1200,200 L0,200 Z"></path>
+        </svg>
+        <svg class="wave" viewBox="0 0 1200 200" preserveAspectRatio="none">
+          <path d="M0,80 C500,100 700,40 1200,80 L1200,200 L0,200 Z"></path>
+        </svg>
+      </div>
+
+            <section class="features animate__animated animate__fadeIn">
+                <h2>How ZENBOT Helps You</h2>
+                <div class="feature-cards">
+                    <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                        <div class="icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Mood Tracking</h3>
+                        <p>Our AI analyzes your emotions and tracks your mood patterns over time.</p>
+                    </div>
+                    <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Coping Strategies</h3>
+                        <p>Personalized suggestions to help you manage stress and improve wellbeing.</p>
+                    </div>
+                    <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                        <div class="icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3>Counselor Connection</h3>
+                        <p>When you need more help, we connect you with licensed professionals.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="wellness-data hidden animate__animated animate__fadeIn" id="wellnessSection">
+                <h2>Your Wellness Data</h2>
+                <div class="data-cards">
+                    <div class="data-card">
+                        <h3>Activity</h3>
+                        <div class="data-value" id="stepsData">--</div>
+                        <p>steps today</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Sleep</h3>
+                        <div class="data-value" id="sleepData">--</div>
+                        <p>hours last night</p>
+                    </div>
+                    <div class="data-card">
+                        <h3>Heart Rate</h3>
+                        <div class="data-value" id="heartRateData">--</div>
+                        <p>bpm average</p>
+                    </div>
+                </div>
+                <div class="mood-chart-container">
+                    <canvas id="moodChart"></canvas>
+                </div>
+            </section>
+        </main>
+
+        <footer class="animate__animated animate__fadeInUp">
+            <p>ZENBOT- AI Mental Health Companion for Gen Z</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Counselor Modal -->
+    <div class="modal hidden" id="counselorModal">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <span class="close-modal">&times;</span>
+            <h2>Connect with a Counselor</h2>
+            <p>Based on our conversation, we recommend speaking with a professional. Here are some counselors available now:</p>
+            <div class="counselor-list">
+                <div class="counselor-card">
+                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Counselor">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Licensed Clinical Psychologist</p>
+                    <button class="btn-primary">Connect Now</button>
+                </div>
+                <div class="counselor-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Counselor">
+                    <h3>Dr. Michael Chen</h3>
+                    <p>Cognitive Behavioral Therapist</p>
+                    <button class="btn-primary">Connect Now</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        const chatContainer = document.getElementById('chatContainer');
-        const userInput = document.getElementById('userInput');
-        const typingIndicator = document.getElementById('typingIndicator');
-
-        function addMessage(message, isUser) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-            messageDiv.textContent = message;
-            chatContainer.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            typingIndicator.style.display = 'block';
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        function hideTypingIndicator() {
-            typingIndicator.style.display = 'none';
-        }
-
-        async function sendMessage() {
-            const question = userInput.value.trim();
-            if (!question) return;
-
-            // Add user message
-            addMessage(question, true);
-            userInput.value = '';
-
-            // Show typing indicator
-            showTypingIndicator();
-
-            try {
-                const response = await fetch('/ask', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ question }),
-                });
-
-                const data = await response.json();
-                
-                // Hide typing indicator
-                hideTypingIndicator();
-
-                if (response.ok) {
-                    addMessage(data.answer, false);
-                } else {
-                    addMessage('Sorry, there was an error processing your question.', false);
-                }
-            } catch (error) {
-                hideTypingIndicator();
-                addMessage('Sorry, there was an error connecting to the server.', false);
-            }
-        }
-
-        // Allow sending message with Enter key
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Focus input on load
-        window.onload = () => {
-            userInput.focus();
-        };
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
 </body>
-</html> 
+</html>

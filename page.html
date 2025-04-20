@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Google Fit | HealthHub</title>
+    <link rel="stylesheet" href="combo.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="animate__animated animate__fadeInDown">
+    <div class="logo">
+        <i class="fas fa-brain"></i>
+        <h1>ZENBOT</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <!-- <li><a href=""></a></li> -->
+            <li><a href="logo.html">login</a></li>
+            <!-- <li><a href="page.html"></a>page</li> -->
+        </ul>
+    </nav>
+    <button class="btn-connect" id="connectFit">Connect Google Fit</button>
+</header>
+    <div class="connect-container">
+        <div class="connect-box rotate-in">
+            <div class="connect-header">
+                <img src="fit.png" alt="Google Fit" class="bounce">
+                <h2>Connect Google Fit</h2>
+                <p>Sync your fitness data for a complete health profile</p>
+            </div>
+            
+            <div class="benefits">
+                <div class="benefit-item fade-in">
+                    <span>✔️</span> Import your activity history
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.2s;">
+                    <span>✔️</span> Track workouts automatically
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.4s;">
+                    <span>✔️</span> Monitor heart rate trends
+                </div>
+                <div class="benefit-item fade-in" style="animation-delay: 0.6s;">
+                    <span>✔️</span> Get personalized insights
+                </div>
+            </div>
+            
+            <div class="permissions">
+                <div class="permission-card swing">
+                    <h4>HealthHub will receive:</h4>
+                    <ul>
+                        <li>Your activity data (steps, distance, calories)</li>
+                        <li>Workout information</li>
+                        <li>Heart rate and other vitals (if available)</li>
+                    </ul>
+                    <p class="small">HealthHub will never modify your Google Fit data</p>
+                </div>
+            </div>
+            
+            <div class="connect-actions">
+                <button class="btn btn-outline slide-in-left">Not Now</button>
+                <button class="btn btn-google pulse" id="connectButton">Connect Google Fit</button>
+            </div>
+        </div>
+        
+        <div class="connection-animation">
+            <div class="pulse-dots"></div>
+            <div class="connection-line"></div>
+            <div class="devices">
+                <div class="phone"></div>
+                <div class="cloud"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src=".js"></script>
+</body>
+</html>

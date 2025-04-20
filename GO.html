@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindEase | AI Mental Health Companion for Gen Z</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #ff6584;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --success: #48bb78;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #8a78ff);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+           
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+            background: transparent;
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideIn 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #4a5568;
+        }
+        
+        .interaction-section {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interaction-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .interaction-tabs {
+            display: flex;
+            background-color: #edf2f7;
+            border-radius: 50px;
+            padding: 5px;
+        }
+        
+        .tab-btn {
+            padding: 10px 25px;
+            border: none;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .chat-container {
+            height: 400px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            background-color: #f8fafc;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            margin-left: auto;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 15px 15px 0 15px;
+        }
+        
+        .bot-message {
+            margin-right: auto;
+            background-color: #edf2f7;
+            padding: 10px 15px;
+            border-radius: 15px 15px 15px 0;
+        }
+        
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-area input, .input-area textarea {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            resize: none;
+        }
+        
+        .input-area button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .input-area button:hover {
+            background-color: #5a52e0;
+        }
+        
+        .voice-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+        
+        .voice-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 101, 132, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .voice-btn.listening {
+            animation: pulse 1s infinite;
+            background-color: #ff2d5e;
+        }
+        
+        .voice-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .camera-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .camera-preview {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .camera-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .camera-preview canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .camera-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .camera-controls button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .camera-controls button:hover {
+            background-color: #5a52e0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            color: #a0aec0;
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 101, 132, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 101, 132, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 101, 132, 0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="l.png" alt="MindEase Logo" style="background: transparent;" id="logo-img">
+                <span class="logo-text">ZEN BOT</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="GO.html">GO</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">log</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <h1>Your AI Mental Health Companion</h1>
+            <!-- <p>MindEase helps Gen Z track moods, suggests coping strategies, and connects you with professional counselors when needed. Powered by Vertex AI and Google Fit.</p> -->
+        </section>
+        
+        <section class="interaction-section">
+            <div class="interaction-header">
+                <div class="interaction-tabs">
+                    <button class="tab-btn active" data-tab="text">Text Chat</button>
+                    <button class="tab-btn" data-tab="voice">Voice</button>
+                    <button class="tab-btn" data-tab="camera">Camera</button>
+                </div>
+            </div>
+            
+            <div id="text" class="tab-content active">
+                <div class="chat-container" id="chat-container">
+                    <div class="chat-message bot-message">
+                        Hi there! I'm MindEase, your AI mental health companion. How are you feeling today?
+                    </div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Type how you're feeling...">
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+            
+            <div id="voice" class="tab-content">
+                <div class="voice-input">
+                    <button class="voice-btn" id="voice-btn">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <p>Press and hold to speak about how you're feeling</p>
+                    <div class="voice-result" id="voice-result"></div>
+                </div>
+            </div>
+            
+            <div id="camera" class="tab-content">
+                <div class="camera-container">
+                    <div class="camera-preview">
+                        <video id="camera-video" autoplay></video>
+                        <canvas id="camera-canvas"></canvas>
+                    </div>
+                    <div class="camera-controls">
+                        <button id="start-camera">Start Camera</button>
+                        <button id="capture-btn">Capture</button>
+                        <button id="analyze-btn" disabled>Analyze Emotion</button>
+                    </div>
+                    <div id="camera-result"></div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Mood Tracking</h3>
+                <p>Our AI tracks your emotional patterns over time to identify trends and provide personalized insights.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Coping Strategies</h3>
+                <p>Get instant, personalized coping mechanisms based on your current emotional state and history.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👩‍⚕️</div>
+                <h3>Professional Connection</h3>
+                <p>When needed, we seamlessly connect you with licensed mental health professionals.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">About</a>
+            </div>
+            <p class="copyright">© 2023 MindEase AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        // Tab switching functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Text chat functionality
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        sendBtn.addEventListener('click', () => {
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+                
+                // Simulate bot response (in a real app, this would call your AI)
+                setTimeout(() => {
+                    const responses = [
+                        "I hear you. Would you like to talk more about what's bothering you?",
+                        "That sounds challenging. Have you tried any coping strategies?",
+                        "I understand. Remember, it's okay to feel this way sometimes.",
+                        "Thank you for sharing. How can I support you right now?"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, false);
+                }, 1000);
+            }
+        });
+        
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+        
+        // Voice functionality
+        const voiceBtn = document.getElementById('voice-btn');
+        const voiceResult = document.getElementById('voice-result');
+        let recognition;
+        
+        try {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                voiceResult.textContent = `You said: "${transcript}"`;
+                
+                // In a real app, you would send this to your AI for processing
+                setTimeout(() => {
+                    voiceResult.innerHTML += `<div style="margin-top: 10px; color: var(--primary);">AI: I heard you say "${transcript}". How can I help you with that?</div>`;
+                }, 500);
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error', event.error);
+                voiceResult.textContent = `Error: ${event.error}`;
+            };
+            
+            voiceBtn.addEventListener('mousedown', () => {
+                voiceBtn.classList.add('listening');
+                recognition.start();
+            });
+            
+            voiceBtn.addEventListener('mouseup', () => {
+                voiceBtn.classList.remove('listening');
+                recognition.stop();
+            });
+            
+            voiceBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                voiceBtn.classList.add('listening');
+                recognition.start();
+            });
+            
+            voiceBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                voiceBtn.classList.remove('listening');
+                recognition.stop();
+            });
+        } catch (e) {
+            console.error('Speech recognition not supported', e);
+            voiceBtn.disabled = true;
+            voiceBtn.style.backgroundColor = '#ccc';
+            voiceResult.textContent = 'Voice input is not supported in your browser';
+        }
+        
+        // Camera functionality
+        const video = document.getElementById('camera-video');
+        const canvas = document.getElementById('camera-canvas');
+        const startCameraBtn = document.getElementById('start-camera');
+        const captureBtn = document.getElementById('capture-btn');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const cameraResult = document.getElementById('camera-result');
+        let stream = null;
+        
+        startCameraBtn.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                startCameraBtn.disabled = true;
+                captureBtn.disabled = false;
+            } catch (err) {
+                console.error('Camera error:', err);
+                cameraResult.textContent = 'Could not access camera. Please check permissions.';
+            }
+        });
+        
+        captureBtn.addEventListener('click', () => {
+            if (stream) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+                analyzeBtn.disabled = false;
+                cameraResult.innerHTML = '<p>Image captured. Click "Analyze Emotion" to process.</p>';
+            }
+        });
+        
+        analyzeBtn.addEventListener('click', () => {
+            // In a real app, this would send the image to Vertex AI for emotion analysis
+            cameraResult.innerHTML = `
+                <div style="background: #f0f4f8; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Analysis Results</h4>
+                    <p>Detected emotion: <strong>Neutral with hints of contentment</strong></p>
+                    <p>Suggested activities:</p>
+                    <ul style="margin-top: 5px; margin-left: 20px;">
+                        <li>Practice gratitude journaling</li>
+                        <li>Try a 5-minute mindfulness exercise</li>
+                        <li>Connect with a friend</li>
+                    </ul>
+                </div>
+            `;
+        });
+        
+        // Logo animation
+        const logoImg = document.getElementById('logo-img');
+        const colors = ['#6c63ff', '#ff6584', '#48bb78', '#f6e05e'];
+        let currentColor = 0;
+        
+        setInterval(() => {
+            logoImg.style.filter = `hue-rotate(${currentColor * 90}deg)`;
+            currentColor = (currentColor + 1) % 4;
+        }, 2000);
+    </script>
+</body>
+</html>
